@@ -1,13 +1,14 @@
 #!/bin/bash
-num_processes=5
-
-for ((i=1; i<=num_processes; i++))
-do
-  sleep 10 & 
-  pid=$!
-  echo "PID: $pid"
+output_file="count.txt"
+echo "0" > "$output_file"
+child_process() {
+    sleep 10
+    count=$(cat "$output_file")
+    ((count++))
+    echo "$count" > "$output_file"
+}
+for i in {1..5}; do
+    child_process &
 done
-
 wait
-echo $num_processes > processed.txt
 sleep 3600

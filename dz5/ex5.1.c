@@ -22,8 +22,6 @@ int main(int argc, char *argv[]) {
         perror("Can not open the file\n");
         exit(-1);
     }
-     int i = 0; 
-    
     while (fgets(buf, MAX_LENGTH, fileFd) != NULL) {
         if(strstr(buf, login) != 0)
         printf("%s", buf);
